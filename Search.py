@@ -9,4 +9,11 @@ class Search:
         pass
 
     def AStar_search():
-        pass    
+        pass
+
+
+
+    def path_search_to_goal():
+        pass
+    
+        
