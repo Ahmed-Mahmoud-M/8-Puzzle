@@ -1,4 +1,5 @@
 import copy
+import math
 class State:
 
     def __init__(self, state:list):
@@ -139,6 +140,42 @@ class State:
 
         path.reverse()
         return path
+    
+    
+
+    def Manhattan_Distance(self):
+        result = 0
+        goal_positions = {
+        0: (0, 0), 1: (0, 1), 2: (0, 2),
+        3: (1, 0), 4: (1, 1), 5: (1, 2),
+        6: (2, 0), 7: (2, 1), 8: (2, 2)  
+        }
+
+        for i in range(3):
+            for j in range(3):
+                x,y = goal_positions[self.state[i][j]]
+                result+= abs(i-x)+(j-y)
+
+
+        return int(result) 
+
+    
+    def Euclidean_Distanc(self):
+        result = 0
+        goal_positions = {
+        0: (0, 0), 1: (0, 1), 2: (0, 2),
+        3: (1, 0), 4: (1, 1), 5: (1, 2),
+        6: (2, 0), 7: (2, 1), 8: (2, 2)  
+        }
+
+        for i in range(3):
+            for j in range(3):
+                x,y = goal_positions[self.state[i][j]]
+                result += math.sqrt((i - x) ** 2 + (j - y) ** 2)
+
+
+        return int(result) 
+
 
 
         

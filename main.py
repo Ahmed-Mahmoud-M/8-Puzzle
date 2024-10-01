@@ -7,22 +7,21 @@ from Search import Search
 
 
 if __name__ == '__main__':
-    initalstate = [
-        [1,2,5],
-        [3,4,0],
-        [6,7,8]
-    ]
-
+    initial_state = [
+    [1, 2, 3],
+    [4, 0, 5],
+    [7, 8, 6]
+]
+    goalstate = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8]
+        ]
     
-    state = State(initalstate)
+    state = State(goalstate)
     search = Search(state)
-    x= search.BFS_search()
-    values =  state.path_search_to_goal(x)
-
-    for value in values:
-        print (value)
-        print()
-        print()
+    x= state.Euclidean_Distanc()
+    print(x)
 
 
     
