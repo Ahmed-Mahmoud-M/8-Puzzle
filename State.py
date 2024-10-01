@@ -11,32 +11,30 @@ class State:
                 if state[i][j] == 0:
                      self.x =i
                      self.y =j
+    def __hash__(self):
+        # Hash function to allow instances to be added to sets
+        return hash(tuple(map(tuple, self.state)))
+
+    def __eq__(self, other):
+        # Equality check to allow comparison between states
+        return isinstance(other, State) and self.state == other.state                 
 
                     
 
+    def __str__(self):
+        return "\n".join(" ".join(map(str, row)) for row in self.state)
 
 
 
-    def is_goalstate(self):
-        goalstate = [
-            [0,1,2],
-            [3,4,5],
-            [6,7,8]
-        ]
-
-        for i in range(3):
-            for j in range(3):
-                if self.state[i][j] != goalstate[i][j]:
-                    return False
-        return True 
+ 
 
 
     def moveup(self):
         if self.x == 0:
-            return None
+            return self
         newstate = State(copy.deepcopy(self.state))
         newstate.state[self.x][self.y] , newstate.state[self.x-1][self.y] = newstate.state[self.x-1][self.y],newstate.state[self.x][self.y]
-        newstate.parent = self.state
+        newstate.parent = self
         newstate.x = self.x -1
         self.child = newstate
 
@@ -46,10 +44,10 @@ class State:
     
     def movedown(self):
         if self.x == 2 :
-            return None
+            return self
         newstate = State(copy.deepcopy(self.state))
         newstate.state[self.x][self.y] , newstate.state[self.x+1][self.y] = newstate.state[self.x+1][self.y],newstate.state[self.x][self.y]
-        newstate.parent = self.state
+        newstate.parent = self
         newstate.x = self.x +1
 
         self.child = newstate
@@ -60,10 +58,10 @@ class State:
     
     def moveRight(self):
         if self.y == 2 :
-            return None
+            return self
         newstate = State(copy.deepcopy(self.state))
         newstate.state[self.x][self.y] , newstate.state[self.x][self.y+1] = newstate.state[self.x][self.y+1],newstate.state[self.x][self.y]
-        newstate.parent = self.state
+        newstate.parent = self
         newstate.y = self.y+1
 
         self.child = newstate
@@ -74,10 +72,10 @@ class State:
 
     def moveLeft(self):
         if self.y == 0:
-            return None
+            return self
         newstate = State(copy.deepcopy(self.state))
         newstate.state[self.x][self.y] , newstate.state[self.x][self.y-1] = newstate.state[self.x][self.y-1],newstate.state[self.x][self.y]
-        newstate.parent = self.state
+        newstate.parent = self
         newstate.y = self.y -1
         self.child = newstate
 
@@ -105,13 +103,48 @@ class State:
             print(" ".join(str(cell) for cell in row)) 
         
         print("--------------------------------------------------------")
+
+    def get_neighbors(self):
+        neighbors = []
+        neighbors.append(self.moveup())
+        neighbors.append(self.movedown())
+        neighbors.append(self.moveRight())
+        neighbors.append(self.moveLeft())
         
+
+
+        return neighbors  
+
+    def is_goalstate(self):
+        goalstate = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8]
+        ]
+
+        for i in range(3):
+            for j in range(3):
+                if self.state[i][j] != goalstate[i][j]:
+                    return False
+        return True 
 
 
        
 
       
+    def path_search_to_goal(self,state):
+        path = []
+        path.append(state)
+        temp = state.parent
+        
+        
+        while temp:
+            
+            path.append(temp)
+            temp = temp.parent    
 
+        path.reverse()
+        return path
 
 
         

@@ -1,4 +1,5 @@
 from State import State
+from Search import Search
 
 
 
@@ -12,14 +13,18 @@ if __name__ == '__main__':
         [6,7,8]
     ]
 
-    state = State(initalstate)
     
-    # x=state.moveup()
-    y= state.moveup()
-    x = y.moveLeft()
-    z = x.moveLeft()
+    state = State(initalstate)
+    search = Search(state)
+    x= search.BFS_search()
+    values =  state.path_search_to_goal(x)
 
-    # w = z.moveRight()
+    for value in values:
+        print (value)
+        print()
+        print()
 
-    state.getchildren()
+
+    
+    
 
