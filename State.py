@@ -11,13 +11,7 @@ class State:
                 if state[i][j] == 0:
                      self.x =i
                      self.y =j
-    def __hash__(self):
-        # Hash function to allow instances to be added to sets
-        return hash(tuple(map(tuple, self.state)))
-
-    def __eq__(self, other):
-        # Equality check to allow comparison between states
-        return isinstance(other, State) and self.state == other.state                 
+    
 
                     
 
