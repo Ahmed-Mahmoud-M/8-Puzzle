@@ -8,9 +8,9 @@ from Search import Search
 
 if __name__ == '__main__':
     initial_state = [
-    [1, 2, 3],
-    [4, 0, 5],
-    [7, 8, 6]
+    [5, 6, 7],
+    [4, 0, 8],
+    [3, 2, 1]
 ]
     goalstate = [
             [0,1,2],
@@ -18,10 +18,12 @@ if __name__ == '__main__':
             [6,7,8]
         ]
     
-    state = State(goalstate)
+    state = State(initial_state)
     search = Search(state)
-    x= state.Euclidean_Distanc()
-    print(x)
+    x= search.BFS_search()
+    for x in state.path_search_to_goal(x):
+        x.print_puzzle()
+        print(x.Manhattan_Distance())
 
 
     

@@ -18,6 +18,9 @@ class State:
 
     def __str__(self):
         return "\n".join(" ".join(map(str, row)) for row in self.state)
+    
+    def __gt__(self, other):
+        return self.Manhattan_Distance() > other.Manhattan_Distance()
 
 
 
@@ -112,9 +115,9 @@ class State:
 
     def is_goalstate(self):
         goalstate = [
-            [0,1,2],
-            [3,4,5],
-            [6,7,8]
+            [1,2,3],
+            [4,5,6],
+            [7,8,0]
         ]
 
         for i in range(3):
@@ -128,6 +131,7 @@ class State:
 
       
     def path_search_to_goal(self,state):
+        print("entering path_search_to_goal")
         path = []
         path.append(state)
         temp = state.parent
@@ -154,7 +158,7 @@ class State:
         for i in range(3):
             for j in range(3):
                 x,y = goal_positions[self.state[i][j]]
-                result+= abs(i-x)+(j-y)
+                result+= abs(i-x)+abs(j-y)
 
 
         return int(result) 
