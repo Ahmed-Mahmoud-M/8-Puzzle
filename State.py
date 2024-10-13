@@ -6,6 +6,7 @@ class State:
         self.state = state
         self.parent = None
         self.child = None
+        self.Depth = 0
         # find the zero position 
         for i in range(3):
             for j in range(3):
@@ -115,9 +116,9 @@ class State:
 
     def is_goalstate(self):
         goalstate = [
-            [1,2,3],
-            [4,5,6],
-            [7,8,0]
+            [0,1,2],
+            [3,4,5],
+            [6,7,8]
         ]
 
         for i in range(3):
@@ -179,6 +180,24 @@ class State:
 
 
         return int(result) 
+    
+
+
+
+    def findDepth(self):
+        temp = self.parent
+        
+        
+        while temp:
+            temp = temp.parent 
+            self.Depth = self.Depth +1
+            print("enter loop")
+        
+        return self.Depth
+
+
+    def GetDepth(self):
+        return int(self.findDepth())
 
 
 
