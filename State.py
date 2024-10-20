@@ -8,6 +8,7 @@ class State:
         self.child = None
         self.Depth = 0
         self.heuristics = 0
+        self.heuristicsvalue = 0
         # find the zero position 
         for i in range(3):
             for j in range(3):
@@ -21,9 +22,16 @@ class State:
     def __str__(self):
         return "\n".join(" ".join(map(str, row)) for row in self.state)
 
-    def __lt__(self,other):
+    def __lt__(self, other):
         return self.heuristic() < other.heuristic()
 
+    
+
+    def setHeuristic(self,heuristic):
+        self.heuristics = heuristic
+
+    def getHeuristic(self):
+        return self.heuristics
 
 
  
@@ -200,11 +208,18 @@ class State:
     def GetDepth(self):
         return int(self.findDepth())
     
+    def udpateheuristic(self,value):
+        self.heuristicsvalue =value
+    
+
+    
     def heuristic(self):
         if self.heuristics == 0:
-            return self.GetDepth() + self.Manhattan_Distance()
+            self.heuristicsvalue = self.GetDepth() + self.Manhattan_Distance()
+            return self.heuristicsvalue
         elif self.heuristics == 1:
-            return self.GetDepth() + self.Euclidean_Distanc()
+            self.heuristicsvalue = self.GetDepth() + self.Euclidean_Distanc()
+            return self.heuristicsvalue
         
 
 

@@ -55,7 +55,7 @@ class UnInformedSearch:
                  
                 if neighbor not in frontier and neighbor not in explored:
                     frontier.append(neighbor)  
-                    explored.add(neighbor)
+                    
 
 
         return None

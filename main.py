@@ -1,5 +1,6 @@
 from State import State
 from UnInformedSearch import *
+from InformedSearch import *
 
 
 
@@ -8,8 +9,8 @@ from UnInformedSearch import *
 
 if __name__ == '__main__':
     initial_state = [
-    [1,2,5],
-    [3, 4, 0],
+    [1, 0, 2],
+    [3, 4, 5],
     [6, 7, 8]
 ]
     goalstate = [
@@ -21,8 +22,8 @@ if __name__ == '__main__':
     state = State(initial_state)
     print(state.GetDepth())
     print(state.Manhattan_Distance())
-    search = UnInformedSearch(state)
-    x= search.BFS_search()
+    search = InformedSearch(state)
+    x= search.Astar()
     for x in state.path_search_to_goal(x):
         x.print_puzzle()
         print("Depth level :" ,x.GetDepth())
